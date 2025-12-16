@@ -3,28 +3,81 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import AudioPlayer from '@/components/AudioPlayer';
+import ArtistDetail from '@/components/ArtistDetail';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [selectedArtistId, setSelectedArtistId] = useState<number | null>(null);
 
-  const artists = [
+  const artistsData = [
     {
       id: 1,
       name: 'NEURAL WAVE',
       genre: 'Synthwave',
-      image: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/a2dc6f83-8bba-451d-8aa8-d60290ff61a1.jpg'
+      image: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/a2dc6f83-8bba-451d-8aa8-d60290ff61a1.jpg',
+      bio: 'NEURAL WAVE — пионер AI-синтвейва, создающий атмосферные композиции на стыке ретро-футуризма и современных технологий. Каждый трек — это путешествие сквозь цифровые пространства и неоновые мечты.',
+      followers: '2.5M',
+      monthlyListeners: '8.3M',
+      tracks: [
+        { id: 1, title: 'Digital Dreams', duration: '3:45', plays: '12M' },
+        { id: 4, title: 'Binary Beats', duration: '3:55', plays: '8.5M' },
+        { id: 7, title: 'Synthetic Soul', duration: '4:20', plays: '6.2M' },
+        { id: 10, title: 'Electric Memories', duration: '3:38', plays: '5.1M' }
+      ],
+      gallery: [
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/3863a604-2f4e-440a-b805-f16032d3f7c8.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/912e2123-9694-4b77-af83-4ee49168177f.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/a2dc6f83-8bba-451d-8aa8-d60290ff61a1.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/3863a604-2f4e-440a-b805-f16032d3f7c8.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/912e2123-9694-4b77-af83-4ee49168177f.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/a2dc6f83-8bba-451d-8aa8-d60290ff61a1.jpg'
+      ]
     },
     {
       id: 2,
       name: 'QUANTUM PULSE',
       genre: 'Techno',
-      image: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/a2dc6f83-8bba-451d-8aa8-d60290ff61a1.jpg'
+      image: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/a2dc6f83-8bba-451d-8aa8-d60290ff61a1.jpg',
+      bio: 'QUANTUM PULSE разрушает границы техно-музыки, используя квантовые алгоритмы для создания гипнотических ритмов. Его сеты — это слияние математики и эмоций в чистом виде.',
+      followers: '1.8M',
+      monthlyListeners: '6.7M',
+      tracks: [
+        { id: 2, title: 'Neon Horizons', duration: '4:12', plays: '10M' },
+        { id: 5, title: 'Quantum State', duration: '4:03', plays: '7.8M' },
+        { id: 8, title: 'Particle Dance', duration: '3:52', plays: '5.9M' },
+        { id: 11, title: 'Wave Function', duration: '4:25', plays: '4.3M' }
+      ],
+      gallery: [
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/912e2123-9694-4b77-af83-4ee49168177f.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/a2dc6f83-8bba-451d-8aa8-d60290ff61a1.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/3863a604-2f4e-440a-b805-f16032d3f7c8.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/912e2123-9694-4b77-af83-4ee49168177f.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/a2dc6f83-8bba-451d-8aa8-d60290ff61a1.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/3863a604-2f4e-440a-b805-f16032d3f7c8.jpg'
+      ]
     },
     {
       id: 3,
       name: 'CYBER ECHO',
       genre: 'Ambient',
-      image: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/a2dc6f83-8bba-451d-8aa8-d60290ff61a1.jpg'
+      image: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/a2dc6f83-8bba-451d-8aa8-d60290ff61a1.jpg',
+      bio: 'CYBER ECHO специализируется на ambient-композициях, которые погружают слушателя в медитативные цифровые ландшафты. Музыка для размышлений в эпоху технологической сингулярности.',
+      followers: '1.2M',
+      monthlyListeners: '4.5M',
+      tracks: [
+        { id: 3, title: 'Silicon Sunrise', duration: '3:28', plays: '9.2M' },
+        { id: 6, title: 'Neural Network', duration: '3:38', plays: '6.5M' },
+        { id: 9, title: 'Digital Meditation', duration: '5:15', plays: '4.8M' },
+        { id: 12, title: 'Cloud Dreams', duration: '4:42', plays: '3.7M' }
+      ],
+      gallery: [
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/a2dc6f83-8bba-451d-8aa8-d60290ff61a1.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/3863a604-2f4e-440a-b805-f16032d3f7c8.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/912e2123-9694-4b77-af83-4ee49168177f.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/a2dc6f83-8bba-451d-8aa8-d60290ff61a1.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/3863a604-2f4e-440a-b805-f16032d3f7c8.jpg',
+        'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/912e2123-9694-4b77-af83-4ee49168177f.jpg'
+      ]
     }
   ];
 
@@ -104,6 +157,35 @@ const Index = () => {
     }
   ];
 
+  const selectedArtist = selectedArtistId 
+    ? artistsData.find(a => a.id === selectedArtistId) 
+    : null;
+
+  const handleArtistClick = (artistId: number) => {
+    setSelectedArtistId(artistId);
+  };
+
+  const handleBackToHome = () => {
+    setSelectedArtistId(null);
+  };
+
+  const handlePlayTrack = (trackId: number) => {
+    console.log('Playing track:', trackId);
+  };
+
+  if (selectedArtist) {
+    return (
+      <>
+        <ArtistDetail 
+          artist={selectedArtist} 
+          onBack={handleBackToHome}
+          onPlayTrack={handlePlayTrack}
+        />
+        <AudioPlayer tracks={tracks} />
+      </>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b border-neon-blue/20">
@@ -155,9 +237,10 @@ const Index = () => {
             <h3 className="text-4xl font-bold text-neon-purple text-glow-purple">AI АРТИСТЫ</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {artists.map((artist) => (
+            {artistsData.map((artist) => (
               <Card
                 key={artist.id}
+                onClick={() => handleArtistClick(artist.id)}
                 className="group bg-card/50 backdrop-blur border-neon-blue/20 hover:border-neon-blue transition-all duration-300 overflow-hidden cursor-pointer hover:scale-105 hover:glow-neon-blue"
               >
                 <div className="relative aspect-square overflow-hidden">
