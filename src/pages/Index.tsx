@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import AudioPlayer from '@/components/AudioPlayer';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -55,6 +56,51 @@ const Index = () => {
       artist: 'NEURAL WAVE',
       cover: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/912e2123-9694-4b77-af83-4ee49168177f.jpg',
       year: '2024'
+    }
+  ];
+
+  const tracks = [
+    {
+      id: 1,
+      title: 'Digital Dreams',
+      artist: 'NEURAL WAVE',
+      cover: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/3863a604-2f4e-440a-b805-f16032d3f7c8.jpg',
+      duration: '3:45'
+    },
+    {
+      id: 2,
+      title: 'Neon Horizons',
+      artist: 'QUANTUM PULSE',
+      cover: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/912e2123-9694-4b77-af83-4ee49168177f.jpg',
+      duration: '4:12'
+    },
+    {
+      id: 3,
+      title: 'Silicon Sunrise',
+      artist: 'CYBER ECHO',
+      cover: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/3863a604-2f4e-440a-b805-f16032d3f7c8.jpg',
+      duration: '3:28'
+    },
+    {
+      id: 4,
+      title: 'Binary Beats',
+      artist: 'NEURAL WAVE',
+      cover: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/912e2123-9694-4b77-af83-4ee49168177f.jpg',
+      duration: '3:55'
+    },
+    {
+      id: 5,
+      title: 'Quantum State',
+      artist: 'QUANTUM PULSE',
+      cover: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/3863a604-2f4e-440a-b805-f16032d3f7c8.jpg',
+      duration: '4:03'
+    },
+    {
+      id: 6,
+      title: 'Neural Network',
+      artist: 'CYBER ECHO',
+      cover: 'https://cdn.poehali.dev/projects/307c7f25-f83a-4dc1-9dc7-e4d7d899f36b/files/912e2123-9694-4b77-af83-4ee49168177f.jpg',
+      duration: '3:38'
     }
   ];
 
@@ -197,7 +243,7 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="py-12 px-6 border-t border-neon-blue/20 bg-card/30">
+      <footer className="py-12 px-6 border-t border-neon-blue/20 bg-card/30 mb-24">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
@@ -221,6 +267,8 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      <AudioPlayer tracks={tracks} />
     </div>
   );
 };
